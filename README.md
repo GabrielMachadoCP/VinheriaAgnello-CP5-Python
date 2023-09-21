@@ -1,4 +1,6 @@
-# Sabor-Solidário-GS-EdgeComputing
+# VINHERIA-AGNELLO-EdgeComputing
+# IoT - Leitura de dados usando STH-Comet
+
 # Índice 
 * [Índice](#índice)
 * [Descrição do Projeto](#Descrição-do-Projeto)
@@ -7,15 +9,14 @@
 * [Conclusão](#Conclusão)
 
 # Descrição-do-Projeto
-O seguinte projeto foi elaborado com o intuito de ajudar a situação de milhares de pessoas do planeta.
-Sabe-se que milhões de pessoas passam fome no mundo, pensando nisso foi pensado em um projeto que 
-redirecionará alimentos que seriam desperdiçados para pessoas que estão passanod por necessidades. 
-Em parceria com a Microsoft, Heinz e a ONG caça-fome, foi desenvolvido um dispositivo em que a pessoa 
-digita seu peso, em quilos, no teclado matricial e então é feita uma conversão de quantas gramas a porção 
-de aimento deste indivíduo terá. Após informar o peso da porção para a pessoa, será feita a pesagem das 
-porções por meio de um sensor de força FSR402, que apesar de não ser tão preciso quanto uma célula de 
-carga, funciona de forma semelhante. Importante ressaltar que todas essas informações aparecerão para 
-o indivíduo pelo display. 
+O seguinte projeto foi elaborado com o intuito de ajudar a situação do caso da vinheria.
+Sabe-se que o cuidado na hora do armazenamento do vinho é crucial para a obtençãoi de bons resultados, por isso
+foi elaborado, usando o FIWARE, uma maneira de analisar e ler os dados da luminosidade do ambiente de forma rápida e prática.
+Os dados passam pela camada de back-end (STH-Comet) e são inseridos em um código em python que ao ler esses dados, gera 
+automaticamente um gráfico para facilitar a leitura do ambiente.
+Abaixo o código para gerar o código durante 15 minutos de leitura:
+
+Click <a href="https://github.com/GabrielMachadoCP/cp5/blob/main/sth-comet.py"> aqui </a>
 
 # Tecnologias-Utilizadas
 * ESP32
