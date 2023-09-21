@@ -18,7 +18,7 @@ Abaixo o código para gerar o código durante 15 minutos de leitura:
 Click <a href="https://github.com/GabrielMachadoCP/cp5/blob/main/sth-comet.py"> aqui </a>
 
 # IoT - Leitura de dados usando STH-Comet
-<img src="https://github.com/GabrielMachadoCP/cp5/blob/main/grafico.jpg">
+<img src="https://github.com/GabrielMachadoCP/cp5/blob/main/grafico.png">
 
 # Tecnologias-Utilizadas
 * ESP32
