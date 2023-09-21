@@ -3,7 +3,7 @@ import requests
 import matplotlib.pyplot as plt
 
 # Define the URL and headers as in your original code
-url = "http://46.17.108.113:8666/STH/v1/contextEntities/type/Lamp/id/urn:ngsi-ld:Lamp:054/attributes/luminosity?aggrMethod=occur&aggrPeriod=hour&dateFrom=2023-09-21T15:00:00.000&dateTo=2023-09-21T15:15:00.000&lastN=15"
+url = "http://46.17.108.113:8666/STH/v1/contextEntities/type/Lamp/id/urn:ngsi-ld:Lamp:001/attributes/luminosity?aggrMethod=occur&aggrPeriod=hour&dateFrom=2023-09-21T15:00:00.000&dateTo=2023-09-21T15:15:00.000&lastN=15"
 headers = {
     'fiware-service': 'smart',
     'fiware-servicepath': '/'
