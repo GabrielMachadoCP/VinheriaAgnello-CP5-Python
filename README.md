@@ -13,9 +13,8 @@ Sabe-se que o cuidado na hora do armazenamento do vinho é crucial para a obten�
 foi elaborado, usando o FIWARE, uma maneira de analisar e ler os dados da luminosidade do ambiente de forma rápida e prática.
 Os dados passam pela camada de back-end (STH-Comet) e são inseridos em um código em python que ao ler esses dados, gera 
 automaticamente um gráfico para facilitar a leitura do ambiente.
-Abaixo o código para gerar o código durante 15 minutos de leitura:
 
-Click <a href="https://github.com/GabrielMachadoCP/cp5/blob/main/sth-comet.py"> aqui </a>
+Abaixo o código para gerar o código durante 15 minutos de leitura: Click <a href="https://github.com/GabrielMachadoCP/cp5/blob/main/sth-comet.py"> aqui </a>
 
 # IoT - Leitura de dados usando STH-Comet
 <img src="https://github.com/GabrielMachadoCP/cp5/blob/main/grafico.png">
