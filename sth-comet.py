@@ -28,7 +28,7 @@ def plotar_grafico(luminosity_data):
     luminosidade = [entry['attrValue'] for entry in luminosity_data]
     tempos = [entry['recvTime'] for entry in luminosity_data]
     plt.figure(figsize=(12, 6))
-    plt.plot(tempos, luminosidade, marker='o', linestyle='-', color='r')
+    plt.plot(tempos, luminosidade, marker='o', linestyle='-', color='b')
     plt.title('Gráfico de Luminosidade em Função do Tempo')
     plt.xlabel('Tempo')
     plt.ylabel('Luminosidade')
@@ -57,8 +57,6 @@ while len(dados_completos) < total_registros_desejados:
 
     # Atualize o total de registros recuperados
     total_registros_recuperados = len(dados_completos)
-
-    print(f"Registros recuperados: {total_registros_recuperados}/{total_registros_desejados}")
 
 # Obtenha os dados de luminosidade completos e plote o gráfico
 luminosity_data.sort(key=lambda x: x['recvTime'])
