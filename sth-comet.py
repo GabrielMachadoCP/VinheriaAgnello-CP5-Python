@@ -1,39 +1,65 @@
-import json
+# Código para obter mais leituras de luminosidade em um intervalo de tempo.
 import requests
 import matplotlib.pyplot as plt
 
-# Define the URL and headers as in your original code
-url = "http://46.17.108.113:8666/STH/v1/contextEntities/type/Lamp/id/urn:ngsi-ld:Lamp:001/attributes/luminosity?aggrMethod=occur&aggrPeriod=hour&dateFrom=2023-09-21T15:00:00.000&dateTo=2023-09-21T15:15:00.000&lastN=15"
-headers = {
-    'fiware-service': 'smart',
-    'fiware-servicepath': '/'
-}
+# Função para obter os dados de luminosidade a partir da API
+def obter_dados_luminosidade(dateFrom, dateTo, lastN):
+    url = f"http://46.17.108.113:8666/STH/v1/contextEntities/type/Lamp/id/urn:ngsi-ld:Lamp:001/attributes/luminosity?dateFrom={dateFrom}&dateTo={dateTo}&lastN={lastN}"
+    headers = {
+        'fiware-service': 'smart',
+        'fiware-servicepath': '/'
+    }
+    response = requests.get(url, headers=headers)
 
-# Send the GET request and get the JSON response
-response = requests.get(url, headers=headers)
+    if response.status_code == 200:
+        data = response.json()
+        print(data)
+        luminosity_data = data['contextResponses'][0]['contextElement']['attributes'][0]['values']
+        return luminosity_data
+    else:
+        print(f"Erro ao obter dados: {response.status_code}")
+        return []
 
-# Parse the JSON response
-data = json.loads(response.text)
+# Função para criar e exibir o gráfico
+def plotar_grafico(luminosity_data):
+    if not luminosity_data:
+        print("Nenhum dado disponível para plotar.")
+        return
+    luminosidade = [entry['attrValue'] for entry in luminosity_data]
+    tempos = [entry['recvTime'] for entry in luminosity_data]
+    plt.figure(figsize=(12, 6))
+    plt.plot(tempos, luminosidade, marker='o', linestyle='-', color='r')
+    plt.title('Gráfico de Luminosidade em Função do Tempo')
+    plt.xlabel('Tempo')
+    plt.ylabel('Luminosidade')
+    plt.xticks(rotation=80)
+    plt.grid(True)
+    plt.tight_layout()
+    plt.show()
 
-# Extract luminosity values
-luminosity_values = [entry['attrValue'] for entry in data['contextResponses'][0]['contextElement']['attributes'][0]['values']]
+# Inicialize uma lista vazia para armazenar os dados
+dados_completos = []
 
-# Create a list of timestamps for the x-axis (assuming 'recvTime' field represents time)
-timestamps = [entry['recvTime'] for entry in data['contextResponses'][0]['contextElement']['attributes'][0]['values']]
+# Número total de registros que você deseja recuperar
+total_registros_desejados = 81
 
-# Convert timestamps to datetime objects (if needed)
-# Create a plot
-plt.figure(figsize=(10, 6))
-plt.plot(timestamps, luminosity_values, marker='o')
-plt.xlabel('Timestamp')
-plt.ylabel('Luminosity Value')
-plt.title('Luminosity vs. Timestamp')
-plt.xticks(rotation=45)# You may need to import datetime for this conversion
+# Defina o tamanho do lote para cada chamada (o limite da API)
+tamanho_lote = 100
 
+# Faça chamadas sequenciais até obter o número desejado de registros
+while len(dados_completos) < total_registros_desejados:
+    # Calcule o valor de lastN para esta chamada
+    lastN = min(tamanho_lote, total_registros_desejados - len(dados_completos))
 
-plt.grid(True)
+    # Obtenha os dados e adicione-os à lista de dados completos
+    luminosity_data = obter_dados_luminosidade("2023-09-19T18:32:37.257Z", "2023-09-19T18:47:17.257Z",lastN)
+    dados_completos.extend(luminosity_data)
 
-# Show or save the plot
-plt.tight_layout()
-plt.show()
-# If you want to save the plot as an image file, use plt.savefig('luminosity_plot.png')
+    # Atualize o total de registros recuperados
+    total_registros_recuperados = len(dados_completos)
+
+    print(f"Registros recuperados: {total_registros_recuperados}/{total_registros_desejados}")
+
+# Obtenha os dados de luminosidade completos e plote o gráfico
+luminosity_data.sort(key=lambda x: x['recvTime'])
+plotar_grafico(dados_completos)
